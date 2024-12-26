@@ -2,6 +2,8 @@ services:
   app:
     image: henrygd/beszel
     restart: unless-stopped
+    extra_hosts:
+      - host.docker.internal:host-gateway
     volumes:
       - app_data:/beszel_data
     networks:
