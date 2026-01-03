@@ -4,15 +4,17 @@ services:
     restart: unless-stopped
     extra_hosts:
       - host.docker.internal:host-gateway
+    environment:
+      - CADDY_DOMAIN=${CADDY_DOMAIN}
+      - CADDY_TYPE=${CADDY_TYPE:-external}
+      - CADDY_PORT=${CADDY_PORT:-8090}
     volumes:
       - app_data:/beszel_data
     networks:
-      proxy_apps:
+      - caddy
 
 volumes:
-    app_data:
+  app_data:
 
 networks:
-  proxy_apps:
-    name: proxy_apps
-    external: true
+  caddy:
